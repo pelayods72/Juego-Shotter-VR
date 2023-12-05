@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body>
+    <!-- Escena -->
+    <a-scene>
+      <!-- Cargamos assets -->
+      <a-asset>
+        <a-asset-item id="palette" src="models/palette/scene.gltf"></a-asset-item>
+        <a-asset-item id="enemy" src="models/eye/scene.gltf"></a-asset-item>
+        <a-asset-item id="gun" src="models/gun/scene.gltf"></a-asset-item>
+        <a-asset-item id="walkman" src="models/walkman/scene.gltf"></a-asset-item>
+        <a-sound id="music" src="audio/La grifa.mp3"></a-sound>
+        <img src="textures/space.jpg" id="space">
+      </a-asset>
+       
+      <!-- Creamos entorno -->
+      <a-sky src="#space"></a-sky>
+
+      <!-- Creamos un suelo -->
+      <a-entity gltf-model="#palette" position="0 0 0" scale="5 5 5"></a-entity>
+
+      <!-- Creamos un reproductor de musica -->
+      <a-entity gltf-model="#walkman" position="1 1 1" scale="0.003 0.003 0.003" rotation="0 180 90" clickable></a-entity>
+
+      <a-entity camera look-controls position="3 1.5 2">
+        <!-- Creamos un cursor -->
+        <a-entity cursor="fuse: true; fuseTimeout: 100" position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="shader: flat">
+        </a-entity>
+
+        <!-- Creamos un texto donde actualizaremos la puntuacion -->
+        <a-text value="0 OJETES REVENTADOS" color="white" position="0 -0.1 -1" 
+          raycaster="objects: .enemy" width="1" align="center">
+        </a-text>
+
+        <!-- Creamos las armas -->
+        <a-entity gltf-model="#gun" position="1 -1 -0.5" scale="2 2 2" rotation="180 10 180"></a-entity>
+        <a-entity gltf-model="#gun" position="-1 -1 -0.5" scale="2 2 2" rotation="180 -10 180"></a-entity>
+
+      </a-entity>
+
+      <!-- Creamos una orbita donde apareceran los enemigos -->
+      <a-entity id="orbita" class="orbit"></a-entity>
+
+     </a-scene>
+  </body>
+</html>
